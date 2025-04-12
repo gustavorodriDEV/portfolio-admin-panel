@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Importa a página de cadastro que você acabou de criar
 import CadastroAdmin from "./pages/CadastroAdmin";
+import LoginAdmin from "./pages/LoginAdmin";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         {/* Quando acessar /cadastro, mostra o componente CadastroAdmin */}
         <Route path="/cadastro" element={<CadastroAdmin />} />
+        <Route path="/login" element={<LoginAdmin />} />
       </Routes>
     </Router>
   )

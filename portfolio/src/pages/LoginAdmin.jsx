@@ -1,31 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // 👈
 
-function CadastroAdmin() {
+function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [confirmarSenha, setConfirmarSenha] = useState("");
-  const navigate = useNavigate(); // 👈
+
+  const adminUrl = process.env.REACT_APP_ADMIN_URL_LOGIN;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (senha !== confirmarSenha) {
-      alert("As senhas não coincidem!");
-      return;
-    }
-
-    const adminUrl = process.env.REACT_APP_ADMIN_URL;
-
     try {
       const response = await axios.post(adminUrl, { email, senha });
       console.log("Dados recebidos:", response.data);
-      alert("Cadastro realizado com sucesso!");
-      navigate("/login");
+      alert("Login realizado com sucesso!");
+
+      setEmail("");
+      setSenha("");
+
     } catch (error) {
       if (error.response) {
-        if (error.response.status === 409) {
+        if (error.response.status === 401) {
           alert(error.response.data);
         } else {
           alert("Erro na resposta do backend: " + error.response.data);
@@ -40,7 +35,7 @@ function CadastroAdmin() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Cadastro de Admin</h1>
+      <h1>Login Admin</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -63,22 +58,10 @@ function CadastroAdmin() {
           />
         </div>
 
-        <div>
-          <label>Confirmar senha:</label><br />
-          <input
-            type="password"
-            value={confirmarSenha}
-            onChange={(e) => setConfirmarSenha(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" style={{ marginTop: "1rem" }}>
-          Cadastrar
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
 
-export default CadastroAdmin;
+export default LoginAdmin;
