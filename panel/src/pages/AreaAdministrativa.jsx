@@ -1,6 +1,7 @@
 // src/pages/AreaAdministrativa.jsx
 import React from "react";
 import PerfilForm from "../components/PerfilForm";
+import ContatoForm from "../components/ContatoForm";
 
 
 export default function AreaAdministrativa() {
@@ -11,6 +12,11 @@ export default function AreaAdministrativa() {
       <section style={{ marginBottom: "3rem" }}>
         <h3>Perfil</h3>
         <PerfilForm />
+      </section>
+
+      <section style={{ marginBottom: "3rem" }}>
+        <h3>Contato</h3>
+        <ContatoForm />
       </section>
 
     </div>

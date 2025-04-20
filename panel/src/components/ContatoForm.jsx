@@ -1,0 +1,82 @@
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  SiInstagram,
+  SiLinkedin,
+  SiGithub,
+  SiWhatsapp,
+  SiFacebook
+} from "react-icons/si";
+
+const contatoUrl = process.env.REACT_APP_CONTATO_URL;
+
+const iconesDisponiveis = [
+  { nome: "Instagram", componente: <SiInstagram />, classe: "SiInstagram" },
+  { nome: "LinkedIn", componente: <SiLinkedin />, classe: "SiLinkedin" },
+  { nome: "GitHub", componente: <SiGithub />, classe: "SiGithub" },
+  { nome: "WhatsApp", componente: <SiWhatsapp />, classe: "SiWhatsapp" },
+  { nome: "Facebook", componente: <SiFacebook />, classe: "SiFacebook" }
+];
+
+export default function ContatoForm() {
+  const [contato, setContato] = useState({ nomeRede: "", url: "", icone: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContato({ ...contato, [name]: value });
+  };
+
+  const selecionarIcone = (classe) => {
+    setContato({ ...contato, icone: classe });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(contatoUrl, contato);
+      alert("Contato cadastrado com sucesso!");
+      setContato({ nomeRede: "", url: "", icone: "" });
+    } catch (error) {
+      console.error("Erro ao cadastrar contato:", error);
+      alert("Erro ao cadastrar contato.");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Nome da Rede:</label><br />
+        <input type="text" name="nomeRede" value={contato.nomeRede} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>URL:</label><br />
+        <input type="url" name="url" value={contato.url} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Ícone:</label><br />
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+          {iconesDisponiveis.map((icone) => (
+            <div
+              key={icone.classe}
+              onClick={() => selecionarIcone(icone.classe)}
+              style={{
+                cursor: "pointer",
+                border: contato.icone === icone.classe ? "2px solid #007bff" : "1px solid #ccc",
+                padding: "8px",
+                borderRadius: "8px"
+              }}
+              title={icone.nome}
+            >
+              {icone.componente}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ marginTop: "1rem" }}>
+        <label>Ícone selecionado: </label>
+        <strong>{contato.icone || "Nenhum"}</strong>
+      </div>
+      <button type="submit" style={{ marginTop: "1rem" }}>Salvar Contato</button>
+    </form>
+  );
+}
