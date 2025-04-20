@@ -3,7 +3,7 @@ import React from "react";
 import PerfilForm from "../components/PerfilForm";
 import ContatoForm from "../components/ContatoForm";
 import HabilidadeForm from "../components/HabilidadeForm";
-
+import ProjetoForm from "../components/ProjetoForm";
 
 export default function AreaAdministrativa() {
   return (
@@ -23,6 +23,11 @@ export default function AreaAdministrativa() {
       <section style={{ marginBottom: "3rem" }}>
         <h3>Habilidades</h3>
         <HabilidadeForm />
+      </section>
+
+      <section style={{ marginBottom: "3rem" }}>
+        <h3>Projetos</h3>
+        <ProjetoForm />
       </section>
 
     </div>
