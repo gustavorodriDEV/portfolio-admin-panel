@@ -1,23 +1,23 @@
-// Importa o React e o sistema de rotas do React Router
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Importa a página de cadastro que você acabou de criar
+// Importando suas páginas
 import CadastroAdmin from "./pages/CadastroAdmin";
 import LoginAdmin from "./pages/LoginAdmin";
+import AreaAdministrativa from "./pages/AreaAdministrativa";
 
 function App() {
   return (
-    // O Router permite trocar de páginas sem recarregar o site
     <Router>
       <Routes>
-        {/* Quando acessar /cadastro, mostra o componente CadastroAdmin */}
         <Route path="/cadastro" element={<CadastroAdmin />} />
         <Route path="/login" element={<LoginAdmin />} />
+        <Route path="/admin" element={<AreaAdministrativa />} />
+        {/* Rota padrão caso queira uma Home futuramente */}
+        <Route path="*" element={<h2>Página não encontrada</h2>} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-// Exporta o componente App principal
 export default App;
