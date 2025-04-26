@@ -1,0 +1,33 @@
+/* ContatoForm.css */
+
+.botao-ver-contatos {
+    margin-bottom: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .lista-contatos {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .item-contato {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .botao-excluir {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
