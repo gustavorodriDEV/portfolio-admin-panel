@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/axios";
 
 const projetosUrl = process.env.REACT_APP_PROJETOS_URL;
 const uploadImgProjetoUrl = process.env.REACT_APP_UPLOAD_IMG_PROJETO_URL;
@@ -21,7 +21,7 @@ export default function ProjetoForm() {
       if (fileProjeto) {
         const formData = new FormData();
         formData.append("file", fileProjeto);
-        const resUpload = await axios.post(uploadImgProjetoUrl, formData);
+        const resUpload = await api.post(uploadImgProjetoUrl, formData);
         caminhoImagem = resUpload.data;
         if (!caminhoImagem) {
           alert("Erro: caminho da imagem não foi retornado.");
@@ -30,7 +30,7 @@ export default function ProjetoForm() {
       }
 
       const novoProjeto = { ...projeto, imagemUrl: caminhoImagem };
-      await axios.post(projetosUrl, novoProjeto);
+      await api.post(projetosUrl, novoProjeto);
       alert("Projeto cadastrado com sucesso!");
       setProjeto({ titulo: "", descricao: "", linkGithub: "", linkHospedado: "", imagemUrl: "" });
       setFileProjeto(null);

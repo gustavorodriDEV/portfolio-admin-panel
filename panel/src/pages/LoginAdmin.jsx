@@ -13,6 +13,7 @@ function LoginAdmin() {
     try {
       const response = await axios.post(adminUrl, { email, senha });
       console.log("Dados recebidos:", response.data);
+      localStorage.setItem("token", response.data);
       alert("Login realizado com sucesso!");
 
       setEmail("");

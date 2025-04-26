@@ -1,6 +1,6 @@
-// src/components/PerfilForm.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/axios";
 
 const perfilUrl = process.env.REACT_APP_PERFIL_URL;
 const uploadFotoUrl = process.env.REACT_APP_UPLOAD_FOTO_URL;
@@ -32,7 +32,7 @@ export default function PerfilForm() {
       if (fileFoto) {
         const formData = new FormData();
         formData.append("file", fileFoto);
-        const resUpload = await axios.post(uploadFotoUrl, formData);
+        const resUpload = await api.post(uploadFotoUrl, formData);
         fotoFinal = resUpload.data;
       }
 
@@ -41,7 +41,7 @@ export default function PerfilForm() {
         await axios.patch(`${perfilUrl}/${perfil.id}`, novoPerfil);
         alert("Perfil atualizado com sucesso!");
       } else {
-        await axios.post(perfilUrl, novoPerfil);
+        await api.post(perfilUrl, novoPerfil);
         alert("Perfil cadastrado com sucesso!");
         setModoEdicao(true);
       }

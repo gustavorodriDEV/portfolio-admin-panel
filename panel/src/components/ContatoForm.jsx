@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/axios";
+
 import {
   SiInstagram,
   SiLinkedin,
@@ -33,7 +34,7 @@ export default function ContatoForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(contatoUrl, contato);
+      await api.post(contatoUrl, contato);
       alert("Contato cadastrado com sucesso!");
       setContato({ nomeRede: "", url: "", icone: "" });
     } catch (error) {

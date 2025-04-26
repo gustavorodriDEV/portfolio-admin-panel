@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/axios";
+
 
 const habilidadeUrl = process.env.REACT_APP_HABILIDADE_URL;
 const uploadIconeUrl = process.env.REACT_APP_UPLOAD_URL;
@@ -15,11 +16,11 @@ export default function HabilidadeForm() {
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
-        const resUpload = await axios.post(uploadIconeUrl, formData);
+        const resUpload = await api.post(uploadIconeUrl, formData);
         caminho = resUpload.data;
       }
       const novaHabilidade = { ...habilidade, icone: caminho };
-      await axios.post(habilidadeUrl, novaHabilidade);
+      await api.post(habilidadeUrl, novaHabilidade);
       alert("Habilidade cadastrada com sucesso!");
       setHabilidade({ nome: "", icone: "" });
       setFile(null);

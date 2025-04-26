@@ -1,11 +1,30 @@
 // src/pages/AreaAdministrativa.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import PerfilForm from "../components/PerfilForm";
 import ContatoForm from "../components/ContatoForm";
 import HabilidadeForm from "../components/HabilidadeForm";
 import ProjetoForm from "../components/ProjetoForm";
+import LogoutButton from "../components/LogoutButton";
 
 export default function AreaAdministrativa() {
+  const navigate = useNavigate();
+  const [carregando, setCarregando] = useState(true); 
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } else {
+      setCarregando(false);
+    }
+  }, [navigate]);
+
+  if (carregando) {
+    return <p>Verificando acesso...</p>;
+  }
+
   return (
     <div style={{ padding: "2rem", maxWidth: "900px", margin: "auto" }}>
       <h2>Área Administrativa</h2>
@@ -29,6 +48,8 @@ export default function AreaAdministrativa() {
         <h3>Projetos</h3>
         <ProjetoForm />
       </section>
+
+      <LogoutButton />
 
     </div>
   );
