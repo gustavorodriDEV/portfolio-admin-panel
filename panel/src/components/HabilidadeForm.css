@@ -1,21 +1,21 @@
-/* ContatoForm.css */
+/* HabilidadeForm.css */
 
-.botao-ver-contatos {
+.botao-azul {
     margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 0.7rem 1.2rem;
     border-radius: 6px;
     cursor: pointer;
   }
   
-  .lista-contatos {
+  .lista-habilidades {
     list-style: none;
     padding: 0;
   }
   
-  .item-contato {
+  .item-habilidade {
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
